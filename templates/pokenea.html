@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokenea</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --poke-violet:#5e00c2;
+      --poke-dark:#0f172a;
+      --poke-muted:#475569;
+      --poke-bg:#f6f7fb;
+      --card:#ffffff;
+      --ring:rgba(239,83,80,.25);
+      --shadow:0 12px 36px rgba(2,6,23,.08);
+      --radius:16px;
+      --yellow:#ffcb05;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;
+      background: radial-gradient(900px 600px at 0% -10%, #ffe8e8, transparent 55%), var(--poke-bg);
+      color:var(--poke-dark);
+      min-height:100vh; display:flex; flex-direction:column;
+    }
+    .nav{
+      position:sticky; top:0; z-index:10; width:100%;
+      background: var(--poke-violet);
+      color:#fff; border-bottom: 3px solid #b71c1c;
+      padding:.85rem 1rem; display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{font-weight:900; letter-spacing:.3px}
+    .brand small{opacity:.9; font-weight:700}
+    .nav-actions{display:flex; gap:.5rem; align-items:center}
+    .btn, .btn-link{
+      display:inline-flex; align-items:center; gap:.5rem; font-weight:800;
+      padding:.55rem .95rem; border-radius:999px; text-decoration:none; cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+    }
+    .btn{background:#1f2937; color:#fff; border:none}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-link{background:#fff; color:#0f172a; border:1px solid rgba(15,23,42,.1)}
+    .btn-link:hover{background:#f1f5f9}
+
+    .wrap{
+      width:100%; max-width:1040px; margin:0 auto; padding:1.25rem 1rem 2.25rem;
+      display:grid; grid-template-columns: 1fr; gap:1rem;
+    }
+    @media (min-width: 920px){
+      .wrap{ grid-template-columns: 1.1fr .9fr; align-items:start }
+    }
+
+    .card{
+      background:var(--card); border:1px solid rgba(15,23,42,.08); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:1.1rem;
+    }
+    .header{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.85rem }
+    .title{
+      display:flex; flex-direction:column; gap:.25rem
+    }
+    h1{font-size:2rem}
+    .sub{color:var(--poke-muted); font-weight:650}
+
+    .img-box{
+      position:relative; overflow:hidden; border-radius:12px; border:1px solid rgba(15,23,42,.08);
+      min-height:280px; display:flex; align-items:center; justify-content:center;
+      background:
+        linear-gradient(45deg, rgba(15,23,42,.04) 25%, transparent 25%) -10px 0/20px 20px,
+        linear-gradient(-45deg, rgba(15,23,42,.04) 25%, transparent 25%) -10px 0/20px 20px,
+        linear-gradient(45deg, transparent 75%, rgba(15,23,42,.04) 75%) -10px 0/20px 20px,
+        linear-gradient(-45deg, transparent 75%, rgba(15,23,42,.04) 75%) -10px 0/20px 20px,
+        #f8fafc;
+    }
+    .img-el{ max-width:100%; height:auto; display:block; object-fit:contain }
+    .skeleton{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(2,6,23,.04), rgba(2,6,23,.02), rgba(2,6,23,.04)); background-size:200% 100%; animation:shimmer 1.6s infinite }
+    @keyframes shimmer{0%{background-position:200% 0} 100%{background-position:-200% 0}}
+
+    .pill{ display:inline-flex; align-items:center; gap:.5rem; background:#fff7cc; color:#7a5d00; border:1px solid #f8e08a; padding:.35rem .7rem; border-radius:999px; font-size:.85rem; font-weight:800 }
+    .badge{ display:inline-flex; align-items:center; gap:.5rem; background:#f1f5f9; border:1px solid rgba(15,23,42,.08); color:#0f172a; padding:.4rem .8rem; border-radius:999px; font-size:.85rem }
+
+    .info{ display:grid; gap:.9rem }
+    .quote{ background:#0b1220; color:#e2e8f0; border-radius:12px; border:1px solid rgba(255,255,255,.06); padding:1rem; font-style:italic }
+    .actions{ display:flex; flex-wrap:wrap; gap:.6rem }
+
+    footer{ margin-top:1rem; text-align:center; color:var(--poke-muted); font-size:.85rem }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Pokenea <small>API</small></div>
+    <div class="nav-actions">
+      <a href="/api/pokenea" class="btn-link" title="Ver JSON">Ver JSON</a>
+      <button class="btn" id="btn-random" title="Nuevo pokenea">Nuevo</button>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="header">
+        <div class="title">
+          <h1>{{ pokenea.nombre }}</h1>
+          <div class="sub">Un Pokenea antioqueño</div>
+        </div>
+        <span class="pill">Container <strong>#{{ contenedor_id }}</strong></span>
+      </div>
+      <div class="img-box">
+        <div class="skeleton" id="sk"></div>
+        <img class="img-el" id="pokeimg" src="{{ pokenea.imagen }}" alt="Imagen de {{ pokenea.nombre }}" />
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="info">
+        <div class="quote">“Frase: {{ pokenea.frase }}”</div>
+        <div class="quote">“Altura: {{ pokenea.altura }}”</div>
+        <div class="quote">“Habilidad: {{ pokenea.habilidad }}”</div>
+        <div class="actions">
+          <a href="/api/pokenea" class="btn-link">Ver JSON</a>
+          <button class="btn" id="btn-refresh">Otro pokenea</button>
+        </div>
+      </div>
+      <footer>Inspirado en el estilo de PokeAPI</footer>
+    </aside>
+
+  <script>
+    // Botones que recargan un nuevo pokenea (la vista hace random server-side)
+    document.getElementById('btn-random').addEventListener('click', () => window.location.reload());
+    document.getElementById('btn-refresh').addEventListener('click', () => window.location.reload());
+
+    // Esqueleto de carga y fallback si falla la imagen
+    const img = document.getElementById('pokeimg');
+    const sk = document.getElementById('sk');
+    const hideSkeleton = () => sk && (sk.style.display = 'none');
+    img.addEventListener('load', hideSkeleton);
+    img.addEventListener('error', () => {
+      hideSkeleton();
+      // Fallback simple: cuadro con texto si no carga
+      const box = img.parentElement;
+      img.style.display = 'none';
+      const fallback = document.createElement('div');
+      fallback.textContent = 'Imagen no disponible';
+      fallback.style.padding = '2rem';
+      fallback.style.color = '#94a3b8';
+      box.appendChild(fallback);
+    });
+    // Por si ya vino cacheada
+    if (img.complete) hideSkeleton();
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "nombre": "MocosoHelado",
+    "altura": "5.8 m",
+    "habilidad": "Moco Congelador",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/mocosohelado.png",
+    "frase": "Da vida es un viaje, do un destino."
+  },
+  {
+    "id": 2,
+    "nombre": "MegaHead",
+    "altura": "1.0 m",
+    "habilidad": "Elec. Estática",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/MegaHead.png",
+    "frase": "El conocimiento es poder."
+  },
+  {
+    "id": 3,
+    "nombre": "Brayan",
+    "altura": "1.4 m",
+    "habilidad": "Robar",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/brayan.png",
+    "frase": "¿Si sabe pa?"
+  },
+    {
+    "id": 4,
+    "nombre": "PatoFachero",
+    "altura": "0,2 m",
+    "habilidad": "Facherismo",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/patofachero.png",
+    "frase": "El gel es mi mejor amigo"
+  },
+  {
+    "id": 5,
+    "nombre": "Indigente",
+    "altura": "0,7 m",
+    "habilidad": "Pedir monedas y perseguir personas",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/indigente.png",
+    "frase": "¿Me puede regalar una monedita para comer?"
+  },
+  {
+    "id": 6,
+    "nombre": "Valentina",
+    "altura": "0,5 m",
+    "habilidad": "Mentir",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/valentina.png",
+    "frase": "Me gusta jugar con los sentimientos de los chicos"
+  },
+    {
+    "id": 7,
+    "nombre": "Chime Nea",
+    "altura": "2,0 m",
+    "habilidad": "Arrojar vapor",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/chimenea.png",
+    "frase": "Severo viaje"
+  },
+  {
+    "id": 8,
+    "nombre": "Venado homosexual de las montañas",
+    "altura": "3.0 m",
+    "habilidad": "Multicolor",
+    "imagen": "https://s3-bucket-pokeneas.s3.us-east-1.amazonaws.com/venadohomosexual.png",
+    "frase": "Me encantas..."
+  }
+]
